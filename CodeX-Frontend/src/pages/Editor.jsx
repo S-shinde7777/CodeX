@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import Editor from "@monaco-editor/react";
 import { useAuth } from "../context/AuthContext";
 import TeachBackPanel from "../components/TeachBackPanel";
+import { Link } from 'react-router-dom';
 
 function EditorPage() {
   const { token } = useAuth();
@@ -175,6 +176,18 @@ function EditorPage() {
           >
             Explain This
           </button>
+          <Link
+            to="/dashboard"
+            className="text-sm text-gray-400 hover:text-white ml-2"
+          >
+            Dashboard
+          </Link>
+          <Link
+            to="/history"
+            className="text-sm text-gray-400 hover:text-white"
+          >
+            History
+          </Link>
         </div>
 
         {/* Monaco Editor */}
