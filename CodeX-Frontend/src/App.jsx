@@ -1,9 +1,10 @@
-import { BrowserRouter, Routes, Route } from 'react-router-dom';
-import { AuthProvider } from './context/AuthContext';
-import LandingPage from './pages/LandingPage';
-import Signup from './pages/Signup';
-import Login from './pages/Login';
-import ProtectedRoute from './components/ProtectedRoute';
+import EditorPage from "./pages/Editor";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { AuthProvider } from "./context/AuthContext";
+import LandingPage from "./pages/LandingPage";
+import Signup from "./pages/Signup";
+import Login from "./pages/Login";
+import ProtectedRoute from "./components/ProtectedRoute";
 
 function App() {
   return (
@@ -17,7 +18,7 @@ function App() {
             path="/editor"
             element={
               <ProtectedRoute>
-                <div className="text-black p-10">Editor page coming soon</div>
+                <EditorPage />
               </ProtectedRoute>
             }
           />
