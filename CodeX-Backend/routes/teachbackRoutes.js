@@ -55,5 +55,14 @@ Compare the explanation against the actual code logic. Respond ONLY with valid J
     res.status(500).json({ message: 'Evaluation failed', error: error.message });
   }
 });
+// GET history
+router.get('/history', async (req, res) => {
+  try {
+    const attempts = await TeachBackAttempt.find({ userId: req.userId }).sort({ createdAt: -1 });
+    res.json(attempts);
+  } catch (error) {
+    res.status(500).json({ message: 'Something went wrong', error: error.message });
+  }
+});
 
 module.exports = router;
