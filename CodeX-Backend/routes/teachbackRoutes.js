@@ -82,4 +82,22 @@ router.get("/history", async (req, res) => {
   }
 });
 
+// DELETE a teach-back attempt
+router.delete('/:id', async (req, res) => {
+  try {
+    const attempt = await TeachBackAttempt.findOneAndDelete({
+      _id: req.params.id,
+      userId: req.userId
+    });
+
+    if (!attempt) {
+      return res.status(404).json({ message: 'Attempt not found' });
+    }
+
+    res.json({ message: 'Deleted successfully' });
+  } catch (error) {
+    res.status(500).json({ message: 'Something went wrong', error: error.message });
+  }
+});
+
 module.exports = router;
