@@ -1,6 +1,12 @@
-import { Link, useLocation, useNavigate } from 'react-router-dom';
-import { Code2, LayoutDashboard, History as HistoryIcon, LogOut } from 'lucide-react';
-import { useAuth } from '../context/AuthContext';
+import { Link, useLocation, useNavigate } from "react-router-dom";
+import {
+  Code2,
+  LayoutDashboard,
+  History as HistoryIcon,
+  LogOut,
+} from "lucide-react";
+import { useAuth } from "../context/AuthContext";
+import Logo from "./Logo";
 
 function ActivityBar() {
   const location = useLocation();
@@ -9,20 +15,20 @@ function ActivityBar() {
 
   const handleLogout = () => {
     logout();
-    navigate('/login');
+    navigate("/login");
   };
 
   const items = [
-    { path: '/editor', icon: Code2, label: 'Editor' },
-    { path: '/dashboard', icon: LayoutDashboard, label: 'Dashboard' },
-    { path: '/history', icon: HistoryIcon, label: 'History' }
+    { path: "/editor", icon: Code2, label: "Editor" },
+    { path: "/dashboard", icon: LayoutDashboard, label: "Dashboard" },
+    { path: "/history", icon: HistoryIcon, label: "History" },
   ];
 
   return (
     <div className="w-16 bg-[#0d0e12] border-r border-gray-800 flex flex-col items-center py-4 h-screen">
       {/* Logo */}
-      <Link to="/" className="mb-8 text-teal-400 font-bold text-lg">
-        CX
+      <Link to="/" className="mb-8">
+        <Logo size={28} />
       </Link>
 
       {/* Nav icons */}
@@ -37,8 +43,8 @@ function ActivityBar() {
               title={item.label}
               className={`p-3 rounded-lg transition ${
                 isActive
-                  ? 'bg-amber-400/20 text-amber-400'
-                  : 'text-gray-500 hover:text-gray-300 hover:bg-gray-800'
+                  ? "bg-amber-400/20 text-amber-400"
+                  : "text-gray-500 hover:text-gray-300 hover:bg-gray-800"
               }`}
             >
               <Icon size={20} />

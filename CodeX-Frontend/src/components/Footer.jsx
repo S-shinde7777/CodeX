@@ -1,13 +1,18 @@
 import { Link } from "react-router-dom";
 import { Mail, Link as LinkIcon, ExternalLink } from "lucide-react";
+import Logo from "./Logo";
+
 function Footer() {
   return (
     <footer className="border-t border-gray-800 bg-[#0d0e12] px-6 py-12">
       <div className="max-w-6xl mx-auto grid grid-cols-2 sm:grid-cols-4 gap-8 text-sm">
         <div className="col-span-2 sm:col-span-1">
-          <h3 className="text-xl font-bold mb-3">
-            <span className="text-amber-400">Code</span>
-            <span className="text-teal-400">X</span>
+          <h3 className="text-xl font-bold mb-3 flex items-center gap-2">
+            <Logo size={24} />
+            <span>
+              <span className="text-amber-400">Code</span>
+              <span className="text-teal-400">X</span>
+            </span>
           </h3>
           <p className="text-gray-500">Don't just read code — teach it back.</p>
         </div>

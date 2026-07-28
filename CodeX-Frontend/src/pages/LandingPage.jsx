@@ -2,6 +2,7 @@ import { Link } from 'react-router-dom';
 import Navbar from '../components/Navbar';
 import Footer from '../components/Footer';
 import Reveal from '../components/Reveal';
+import HeroMockup from '../components/HeroMockup';
 
 function LandingPage() {
   return (
@@ -9,33 +10,61 @@ function LandingPage() {
       <Navbar />
 
       {/* Hero */}
-      <section className="relative text-center px-4 py-16 sm:py-24">
-        {/* Floating glow blobs */}
-        <div className="absolute top-10 left-1/4 w-72 h-72 bg-amber-500/10 rounded-full blur-3xl animate-float pointer-events-none" />
-        <div className="absolute top-32 right-1/4 w-72 h-72 bg-teal-500/10 rounded-full blur-3xl animate-float pointer-events-none" style={{ animationDelay: '2s' }} />
+      <section className="relative px-4 py-16 sm:py-24 overflow-hidden">
+  {/* Animated grid background */}
+  <div
+    className="absolute inset-0 opacity-[0.07] pointer-events-none"
+    style={{
+      backgroundImage: 'linear-gradient(#fff 1px, transparent 1px), linear-gradient(90deg, #fff 1px, transparent 1px)',
+      backgroundSize: '40px 40px'
+    }}
+  />
 
-        <div className="relative animate-fadeInUp">
-          <span className="inline-block border border-gray-700 rounded-full px-4 py-1 text-sm text-gray-400 mb-6 animate-glowPulse">
-            ✨ AI Coding Education, Reimagined
-          </span>
-          <h1 className="text-4xl sm:text-6xl font-bold leading-tight mb-6">
-            <span className="text-gray-100">Don't just</span><br />
-            <span className="text-amber-400">read code —</span><br />
-            <span className="text-teal-400">teach it back.</span>
-          </h1>
-          <p className="text-gray-400 max-w-xl mx-auto mb-8">
-            Most AI coding tools explain code to you. CodeX flips the script —
-            you explain your code to the AI. It listens, evaluates, and helps you truly understand.
-          </p>
-          <Link
-            to="/signup"
-            className="inline-block bg-amber-400 text-black font-semibold px-8 py-3 rounded-full shadow-lg shadow-amber-400/40 hover:bg-amber-300 hover:scale-105 hover:shadow-amber-400/60 transition-all duration-300"
-          >
-            🚀 Start Teaching Now
-          </Link>
-          <p className="text-gray-600 text-sm mt-4">No credit card required • Free to get started</p>
-        </div>
-      </section>
+  {/* Floating glow blobs */}
+  <div className="absolute top-10 left-1/4 w-72 h-72 bg-amber-500/10 rounded-full blur-3xl animate-float pointer-events-none" />
+  <div className="absolute top-32 right-1/4 w-72 h-72 bg-teal-500/10 rounded-full blur-3xl animate-float pointer-events-none" style={{ animationDelay: '2s' }} />
+
+  <div className="relative max-w-6xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+    <div className="text-center lg:text-left animate-fadeInUp">
+      <span className="inline-block border border-gray-700 rounded-full px-4 py-1 text-sm text-gray-400 mb-6 animate-glowPulse">
+        ✨ AI Coding Education, Reimagined
+      </span>
+      <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold leading-tight mb-6">
+        <span className="text-gray-100">Don't just</span><br />
+        <span className="text-amber-400">read code —</span><br />
+        <span className="text-teal-400 relative inline-block">
+          teach it back.
+          <svg className="absolute -bottom-2 left-0 w-full" height="10" viewBox="0 0 200 10" preserveAspectRatio="none">
+            <path
+              d="M0,5 Q50,0 100,5 T200,5"
+              stroke="#2dd4bf"
+              strokeWidth="3"
+              fill="none"
+              strokeDasharray="200"
+              strokeDashoffset="200"
+              style={{ animation: 'draw 1.2s ease-out 0.6s forwards' }}
+            />
+          </svg>
+        </span>
+      </h1>
+      <p className="text-gray-400 max-w-xl mx-auto lg:mx-0 mb-8">
+        Most AI coding tools explain code to you. CodeX flips the script —
+        you explain your code to the AI. It listens, evaluates, and helps you truly understand.
+      </p>
+      <Link
+        to="/signup"
+        className="inline-block bg-amber-400 text-black font-semibold px-8 py-3 rounded-full shadow-lg shadow-amber-400/40 hover:bg-amber-300 hover:scale-105 hover:shadow-amber-400/60 transition-all duration-300"
+      >
+        🚀 Start Teaching Now
+      </Link>
+      <p className="text-gray-600 text-sm mt-4">No credit card required • Free to get started</p>
+    </div>
+
+    <div className="animate-fadeInUp" style={{ animationDelay: '0.3s' }}>
+      <HeroMockup />
+    </div>
+  </div>
+</section>
 
       {/* How it works */}
       <section id="how-it-works" className="bg-[#181a21] py-16 px-4 text-center">
