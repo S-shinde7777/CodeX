@@ -6,10 +6,6 @@ import TeachBackPanel from "../components/TeachBackPanel";
 
 function EditorPage() {
   const { token } = useAuth();
-  const [sidebarWidth, setSidebarWidth] = useState(256); // 256px = w-64
-  const [outputHeight, setOutputHeight] = useState(160); // 160px = h-40
-  const [isDraggingSidebar, setIsDraggingSidebar] = useState(false);
-  const [isDraggingOutput, setIsDraggingOutput] = useState(false);
   const [code, setCode] = useState("// Write your code here\n");
   const [language, setLanguage] = useState("javascript");
   const [output, setOutput] = useState("");
@@ -32,36 +28,6 @@ function EditorPage() {
     setSnippets(data);
     setLoadingSnippets(false);
   };
-
-  useEffect(() => {
-    const handleMouseMove = (e) => {
-      if (isDraggingSidebar) {
-        const newWidth = e.clientX - 64; // 64 = ActivityBar width
-        if (newWidth >= 180 && newWidth <= 500) {
-          setSidebarWidth(newWidth);
-        }
-      }
-      if (isDraggingOutput) {
-        const newHeight = window.innerHeight - e.clientY;
-        if (newHeight >= 80 && newHeight <= 500) {
-          setOutputHeight(newHeight);
-        }
-      }
-    };
-
-    const handleMouseUp = () => {
-      setIsDraggingSidebar(false);
-      setIsDraggingOutput(false);
-    };
-
-    window.addEventListener("mousemove", handleMouseMove);
-    window.addEventListener("mouseup", handleMouseUp);
-
-    return () => {
-      window.removeEventListener("mousemove", handleMouseMove);
-      window.removeEventListener("mouseup", handleMouseUp);
-    };
-  }, [isDraggingSidebar, isDraggingOutput]);
 
   const handleRun = async () => {
     setRunning(true);
@@ -154,10 +120,7 @@ function EditorPage() {
         {" "}
         <ActivityBar />
         {/* My Files panel */}
-        <div
-          style={{ width: `${sidebarWidth}px` }}
-          className="bg-[#181a21] border-r border-gray-800 p-4 flex flex-col flex-shrink-0"
-        >
+        <div className="w-64 bg-[#181a21] border-r border-gray-800 p-4 flex flex-col">
           {" "}
           <button
             onClick={handleNewFile}
@@ -203,10 +166,6 @@ function EditorPage() {
           </div>
         </div>
         {/* Main editor area */}
-        <div
-          onMouseDown={() => setIsDraggingSidebar(true)}
-          className="w-1 cursor-col-resize bg-gray-800 hover:bg-teal-500 transition-colors flex-shrink-0"
-        />
         <div className="flex-1 flex flex-col">
           <div className="flex items-center gap-4 p-3 border-b border-gray-800 bg-[#181a21]">
             <input
@@ -254,20 +213,11 @@ function EditorPage() {
             />
           </div>
 
-          <div
-            style={{ height: `${outputHeight}px` }}
-            className="bg-[#0d0e12] border-t border-gray-800 overflow-y-auto flex flex-col flex-shrink-0"
-          >
-            <div
-              onMouseDown={() => setIsDraggingOutput(true)}
-              className="h-1 cursor-row-resize bg-gray-800 hover:bg-amber-400 transition-colors flex-shrink-0"
-            />
-            <div className="p-3 overflow-y-auto flex-1">
-              <p className="text-xs text-gray-500 mb-1">Output</p>
-              <pre className="text-sm text-teal-300 whitespace-pre-wrap">
-                {output}
-              </pre>
-            </div>
+          <div className="h-40 bg-[#0d0e12] border-t border-gray-800 p-3 overflow-y-auto">
+            <p className="text-xs text-gray-500 mb-1">Output</p>
+            <pre className="text-sm text-teal-300 whitespace-pre-wrap">
+              {output}
+            </pre>
           </div>
         </div>
         {showTeachBack && (
