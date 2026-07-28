@@ -6,6 +6,7 @@ function TeachBackPanel({ code, language, onClose }) {
   const [explanation, setExplanation] = useState('');
   const [feedback, setFeedback] = useState(null);
   const [loading, setLoading] = useState(false);
+  const [level, setLevel] = useState('beginner');
 
   const handleSubmit = async () => {
     if (!explanation.trim()) return;
@@ -18,7 +19,7 @@ function TeachBackPanel({ code, language, onClose }) {
           'Content-Type': 'application/json',
           Authorization: `Bearer ${token}`
         },
-        body: JSON.stringify({ code, language, studentExplanation: explanation })
+        body: JSON.stringify({ code, language, studentExplanation: explanation, level })
       });
       const data = await response.json();
       setFeedback(data.aiFeedback);
@@ -32,6 +33,12 @@ function TeachBackPanel({ code, language, onClose }) {
     setFeedback(null);
     setExplanation('');
   };
+
+  const levels = [
+    { key: 'beginner', label: 'Beginner' },
+    { key: 'intermediate', label: 'Intermediate' },
+    { key: 'advanced', label: 'Advanced' }
+  ];
 
   return (
     <div className="fixed top-0 right-0 h-full w-full max-w-md bg-[#181a21] border-l border-gray-700 z-50 overflow-y-auto p-6 shadow-2xl">
@@ -49,11 +56,29 @@ function TeachBackPanel({ code, language, onClose }) {
 
       {!feedback && (
         <>
+          {/* Level selector */}
+          <p className="text-xs text-gray-500 mb-2">Evaluate me as:</p>
+          <div className="flex gap-2 mb-4">
+            {levels.map((l) => (
+              <button
+                key={l.key}
+                onClick={() => setLevel(l.key)}
+                className={`flex-1 text-xs font-medium py-2 rounded-lg border transition ${
+                  level === l.key
+                    ? 'bg-amber-400 text-black border-amber-400'
+                    : 'bg-transparent text-gray-400 border-gray-700 hover:border-gray-500'
+                }`}
+              >
+                {l.label}
+              </button>
+            ))}
+          </div>
+
           <textarea
             value={explanation}
             onChange={(e) => setExplanation(e.target.value)}
             placeholder="Type your explanation here..."
-            rows={8}
+            rows={7}
             className="w-full bg-[#1f2128] border border-gray-700 rounded-lg p-3 text-sm text-gray-200 focus:outline-none focus:border-amber-400"
           />
           <button
