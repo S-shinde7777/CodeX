@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
 import { useAuth } from '../context/AuthContext';
 import { Link } from 'react-router-dom';
+import ActivityBar from '../components/ActivityBar';
 
 function History() {
   const { token } = useAuth();
@@ -21,15 +22,13 @@ function History() {
   };
 
   return (
-    <div className="min-h-screen bg-[#12141A] text-gray-200 p-6">
-      <div className="flex justify-between items-center mb-6">
+<div className="flex h-screen bg-[#12141A] text-gray-200">
+  <ActivityBar />
+  <div className="flex-1 p-6 overflow-y-auto">      <div className="flex justify-between items-center mb-6">
         <h1 className="text-2xl font-semibold">
           <span className="text-amber-400">Explanation</span>{' '}
           <span className="text-teal-400">History</span>
         </h1>
-        <Link to="/editor" className="text-sm text-teal-400 hover:underline">
-          ← Back to Editor
-        </Link>
       </div>
 
       {loading && <p className="text-gray-500">Loading...</p>}
@@ -75,6 +74,7 @@ function History() {
           );
         })}
       </div>
+    </div>
     </div>
   );
 }

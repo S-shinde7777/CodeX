@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
 import { useAuth } from '../context/AuthContext';
 import { Link } from 'react-router-dom';
+import ActivityBar from '../components/ActivityBar';
 
 function Dashboard() {
   const { token } = useAuth();
@@ -25,15 +26,13 @@ function Dashboard() {
   const gapCount = totalSessions - strongCount;
 
   return (
-    <div className="min-h-screen bg-[#12141A] text-gray-200 p-6">
-      <div className="flex justify-between items-center mb-6">
+<div className="flex h-screen bg-[#12141A] text-gray-200">
+  <ActivityBar />
+  <div className="flex-1 p-6 overflow-y-auto">      <div className="flex justify-between items-center mb-6">
         <h1 className="text-2xl font-semibold">
           <span className="text-amber-400">Progress</span>{' '}
           <span className="text-teal-400">Dashboard</span>
         </h1>
-        <Link to="/editor" className="text-sm text-teal-400 hover:underline">
-          ← Back to Editor
-        </Link>
       </div>
 
       {loading ? (
@@ -63,6 +62,7 @@ function Dashboard() {
           </Link>
         </>
       )}
+    </div>
     </div>
   );
 }
