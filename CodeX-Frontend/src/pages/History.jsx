@@ -13,7 +13,7 @@ function History() {
   }, []);
 
   const fetchHistory = async () => {
-    const response = await fetch('http://localhost:5000/api/teachback/history', {
+    const response = await fetch(`${import.meta.env.VITE_API_URL}/api/teachback/history`, {
       headers: { Authorization: `Bearer ${token}` }
     });
     const data = await response.json();

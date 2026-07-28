@@ -21,7 +21,7 @@ function EditorPage() {
   }, []);
 
   const fetchSnippets = async () => {
-    const response = await fetch("http://localhost:5000/api/snippets", {
+    const response = await fetch(`${import.meta.env.VITE_API_URL}/api/snippets`, {
       headers: { Authorization: `Bearer ${token}` },
     });
     const data = await response.json();
@@ -33,7 +33,7 @@ function EditorPage() {
     setRunning(true);
     setOutput("");
     try {
-      const response = await fetch("http://localhost:5000/api/execute", {
+      const response = await fetch(`${import.meta.env.VITE_API_URL}/api/execute`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -67,7 +67,7 @@ function EditorPage() {
   const handleSaveFile = async () => {
     if (currentSnippetId) {
       const response = await fetch(
-        `http://localhost:5000/api/snippets/${currentSnippetId}`,
+        `${import.meta.env.VITE_API_URL}/api/snippets/${currentSnippetId}`,
         {
           method: "PUT",
           headers: {
@@ -80,7 +80,7 @@ function EditorPage() {
       const updated = await response.json();
       setSnippets(snippets.map((s) => (s._id === updated._id ? updated : s)));
     } else {
-      const response = await fetch("http://localhost:5000/api/snippets", {
+      const response = await fetch(`${import.meta.env.VITE_API_URL}/api/snippets`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -100,7 +100,7 @@ function EditorPage() {
     );
     if (!confirmed) return;
 
-    await fetch(`http://localhost:5000/api/snippets/${id}`, {
+    await fetch(`${import.meta.env.VITE_API_URL}/api/snippets/${id}`, {
       method: "DELETE",
       headers: { Authorization: `Bearer ${token}` },
     });
