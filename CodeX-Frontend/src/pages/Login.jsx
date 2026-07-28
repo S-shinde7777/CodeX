@@ -1,22 +1,22 @@
-import { useState } from 'react';
-import { useNavigate, Link } from 'react-router-dom';
-import { useAuth } from '../context/AuthContext';
+import { useState } from "react";
+import { useNavigate, Link } from "react-router-dom";
+import { useAuth } from "../context/AuthContext";
 
 function Login() {
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
-  const [error, setError] = useState('');
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [error, setError] = useState("");
   const navigate = useNavigate();
   const { login } = useAuth();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    setError('');
+    setError("");
     try {
-      const response = await fetch('http://localhost:5000/api/auth/login', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ email, password })
+      const response = await fetch("http://localhost:5000/api/auth/login", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ email, password }),
       });
       const data = await response.json();
 
@@ -26,17 +26,19 @@ function Login() {
       }
 
       login(data.token, data.user);
-      navigate('/editor');
+      navigate("/editor");
     } catch (err) {
-      setError('Something went wrong');
+      setError("Something went wrong");
     }
   };
 
   return (
     <div className="min-h-screen bg-black text-white flex items-center justify-center px-4">
-      <div className="bg-gray-900 p-8 rounded-xl border border-gray-700 w-full max-w-md">
+      <div className="bg-gray-900 p-6 sm:p-8 rounded-xl border border-gray-700 w-full max-w-md">
+        {" "}
         <h1 className="text-3xl font-semibold mb-6 text-center">
-          <span className="text-amber-400">Code</span><span className="text-teal-400">X</span> Login
+          <span className="text-amber-400">Code</span>
+          <span className="text-teal-400">X</span> Login
         </h1>
         {error && <p className="text-red-400 mb-4 text-sm">{error}</p>}
         <form onSubmit={handleSubmit} className="flex flex-col gap-4">
@@ -64,7 +66,10 @@ function Login() {
           </button>
         </form>
         <p className="text-center text-gray-400 mt-4 text-sm">
-          Don't have an account? <Link to="/signup" className="text-teal-400">Sign Up</Link>
+          Don't have an account?{" "}
+          <Link to="/signup" className="text-teal-400">
+            Sign Up
+          </Link>
         </p>
       </div>
     </div>
