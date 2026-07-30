@@ -12,11 +12,11 @@ const codeSnippetSchema = new mongoose.Schema({
     default: 'Untitled'
   },
   language: {
-    type: String,
-    required: true,
-    enum: ['javascript', 'python'],
-    default: 'javascript'
-  },
+  type: String,
+  required: true,
+  enum: ['javascript', 'python', 'c', 'cpp', 'java'],
+  default: 'javascript'
+},
   code: {
     type: String,
     default: ''

@@ -6,7 +6,10 @@ router.use(authMiddleware);
 
 const LANGUAGE_IDS = {
   javascript: 63,
-  python: 71
+  python: 71,
+  c: 50,
+  cpp: 54,
+  java: 62
 };
 
 router.post('/', async (req, res) => {
