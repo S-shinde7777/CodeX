@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { useAuth } from '../context/AuthContext';
+import VoiceInput from './VoiceInput';
 
 function TeachBackPanel({ code, language, onClose }) {
   const { token } = useAuth();
@@ -73,6 +74,8 @@ function TeachBackPanel({ code, language, onClose }) {
               </button>
             ))}
           </div>
+
+          <VoiceInput onResult={(text) => setExplanation((prev) => prev ? prev + ' ' + text : text)} />
 
           <textarea
             value={explanation}
