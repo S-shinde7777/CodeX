@@ -55,10 +55,10 @@ function Footer() {
         <div>
           <p className="text-gray-300 font-medium mb-3">Connect</p>
           <div className="flex gap-4 text-gray-500 text-sm">
-            <a href="#" className="hover:text-amber-400 transition">
+            <a href="https://github.com/S-shinde7777" className="hover:text-amber-400 transition">
               GitHub
             </a>
-            <a href="#" className="hover:text-amber-400 transition">
+            <a href="https://www.linkedin.com/in/sagar-shinde-bab951381/" className="hover:text-amber-400 transition">
               LinkedIn
             </a>
             <a href="#" className="hover:text-amber-400 transition">
