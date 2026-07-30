@@ -17,7 +17,7 @@ router.post('/evaluate', async (req, res) => {
 
     const instruction = levelInstructions[level] || levelInstructions.beginner;
 
-    const prompt = `You are evaluating a student's understanding of their own code.
+    const prompt = `You are evaluating a student's understanding of their own code. The student's explanation may be in any language (English, Hindi, Marathi, or mixed). Understand it regardless of language, but ALWAYS respond in English only, in the JSON format below.
 
 ${instruction}
 
