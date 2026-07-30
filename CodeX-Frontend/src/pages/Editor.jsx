@@ -21,9 +21,12 @@ function EditorPage() {
   }, []);
 
   const fetchSnippets = async () => {
-    const response = await fetch(`${import.meta.env.VITE_API_URL}/api/snippets`, {
-      headers: { Authorization: `Bearer ${token}` },
-    });
+    const response = await fetch(
+      `${import.meta.env.VITE_API_URL}/api/snippets`,
+      {
+        headers: { Authorization: `Bearer ${token}` },
+      },
+    );
     const data = await response.json();
     setSnippets(data);
     setLoadingSnippets(false);
@@ -33,14 +36,17 @@ function EditorPage() {
     setRunning(true);
     setOutput("");
     try {
-      const response = await fetch(`${import.meta.env.VITE_API_URL}/api/execute`, {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: `Bearer ${token}`,
+      const response = await fetch(
+        `${import.meta.env.VITE_API_URL}/api/execute`,
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${token}`,
+          },
+          body: JSON.stringify({ code, language }),
         },
-        body: JSON.stringify({ code, language }),
-      });
+      );
       const data = await response.json();
       setOutput(data.stdout || data.stderr || "No output");
     } catch (err) {
@@ -80,14 +86,17 @@ function EditorPage() {
       const updated = await response.json();
       setSnippets(snippets.map((s) => (s._id === updated._id ? updated : s)));
     } else {
-      const response = await fetch(`${import.meta.env.VITE_API_URL}/api/snippets`, {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: `Bearer ${token}`,
+      const response = await fetch(
+        `${import.meta.env.VITE_API_URL}/api/snippets`,
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${token}`,
+          },
+          body: JSON.stringify({ title, language, code }),
         },
-        body: JSON.stringify({ title, language, code }),
-      });
+      );
       const newSnippet = await response.json();
       setSnippets([newSnippet, ...snippets]);
       setCurrentSnippetId(newSnippet._id);
@@ -176,10 +185,13 @@ function EditorPage() {
             <select
               value={language}
               onChange={(e) => setLanguage(e.target.value)}
-              className="bg-[#1f2128] border border-gray-700 rounded px-3 py-1 text-sm"
+              className="bg-[#1f2128] border border-gray-700 rounded-lg px-3 py-1 text-sm"
             >
               <option value="javascript">JavaScript</option>
               <option value="python">Python</option>
+              <option value="c">C</option>
+              <option value="cpp">C++</option>
+              <option value="java">Java</option>
             </select>
             <button
               onClick={handleSaveFile}
