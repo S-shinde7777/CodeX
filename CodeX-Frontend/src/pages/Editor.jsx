@@ -33,27 +33,31 @@ function EditorPage() {
   };
 
   const handleRun = async () => {
-    setRunning(true);
-    setOutput("");
-    try {
-      const response = await fetch(
-        `${import.meta.env.VITE_API_URL}/api/execute`,
-        {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-            Authorization: `Bearer ${token}`,
-          },
-          body: JSON.stringify({ code, language }),
-        },
-      );
-      const data = await response.json();
-      setOutput(data.stdout || data.stderr || "No output");
-    } catch (err) {
-      setOutput("Error running code");
+  setRunning(true);
+  setOutput('');
+  try {
+    const response = await fetch(`${import.meta.env.VITE_API_URL}/api/execute`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: `Bearer ${token}`
+      },
+      body: JSON.stringify({ code, language })
+    });
+
+    if (response.status === 429) {
+      setOutput('Server is busy right now (too many requests). Please wait a few seconds and try again.');
+      setRunning(false);
+      return;
     }
-    setRunning(false);
-  };
+
+    const data = await response.json();
+    setOutput(data.stdout || data.stderr || 'No output');
+  } catch (err) {
+    setOutput('Error running code. Please check your connection and try again.');
+  }
+  setRunning(false);
+};
 
   const handleNewFile = () => {
     setCurrentSnippetId(null);
