@@ -65,8 +65,9 @@ Compare the explanation against the actual code logic, evaluating at the appropr
 
     res.json(attempt);
   } catch (error) {
-    res.status(500).json({ message: 'Evaluation failed', error: error.message });
-  }
+  console.error('TeachBack evaluation error:', error);
+  res.status(500).json({ message: 'Evaluation failed', error: error.message });
+}
 });
 // GET history
 router.get("/history", async (req, res) => {
