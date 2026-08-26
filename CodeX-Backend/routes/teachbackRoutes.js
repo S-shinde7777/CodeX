@@ -47,6 +47,7 @@ Compare the explanation against the actual code logic, evaluating at the appropr
     });
 
     const data = await response.json();
+    console.log('Groq response:', JSON.stringify(data));
     let aiText = data.choices[0].message.content;
 
     aiText = aiText.replace(/```json|```/g, '').trim();
